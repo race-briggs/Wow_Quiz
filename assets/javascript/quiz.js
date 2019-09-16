@@ -23,7 +23,7 @@ $(document).ready(function(){
       answerText: 'Baine',
       answerCorrect: false
     }],
-      image: "../images/sylvanas.gif"
+      image: "https://media.giphy.com/media/xThtatRttFzLD9oEtG/giphy.gif"
   }, 
     {
       questionNumber: 2,
@@ -136,10 +136,6 @@ $(document).ready(function(){
 
   var time = 30;
 
-  var resultImg;
-
-  var imgTimer = 3;
-
   var timer;
 
   var submitBtn = $('<button>').attr('class', 'submit-btn').attr('type', 'submit');
@@ -163,9 +159,8 @@ $(document).ready(function(){
 
   $(document).on('click', '.submit-btn', function(event){
     event.preventDefault();
+    $('.question-div').addClass('hidden');
     checkAnswer();
-    $('.results').addClass('hidden');
-    newQuestion();
   })
 
   function checkAnswer(){
@@ -184,19 +179,31 @@ $(document).ready(function(){
   function wrongAnswer(){
     console.log('wrong');
     $('.results').empty();
-    $('.results').removeClass('hidden')
-    resultImg = setInterval(showImg, 3000);
+    $('.results').removeClass('hidden');
+    showResult();
   }
 
   function correctAnswer(){
     console.log('right!');
-    resultImg = setInterval(showImg, 3000);
+    $('.results').empty();
+    $('.results').removeClass('hidden');
+    showResult();
     numCorrect++;
     updateScore();
   }
 
-  function showImg(){
-    $('.results').html('<img src="' + )
+  function showResult(){
+    alert('showing result picture');
+    console.log(questions[questionTracker-1].image);
+    $('.results').append('<img src=' + questions[questionTracker - 1].image + ' class="results-img">');
+    setTimeout(hideResult, 5000);
+  }
+
+  function hideResult(){
+    alert('RESULT IMAGE OVER')
+    $('.results').addClass('hidden');
+    $('.question-div').removeClass('hidden');
+    newQuestion();
   }
 
   function questionTimer(){
@@ -230,6 +237,18 @@ $(document).ready(function(){
   function newQuestion(){
 
     $('.question-form').empty();
+
+    //questions.forEach(function(question){
+    //  var title = $('<h1>');
+    //  title.text(question.question);
+    //
+    //  $('.question-div').append(title);
+    //
+    //  question.answers.forEach(function(answer){
+    //   
+    //  })
+    //
+    //})
 
     var title = $('<h2>');
 
