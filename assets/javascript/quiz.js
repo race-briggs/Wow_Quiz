@@ -19,7 +19,7 @@ $(document).ready(function(){
       answerCorrect: false
     },
     {
-      answerNumber: 1,
+      answerNumber: 4,
       answerText: 'Baine',
       answerCorrect: false
     }]
@@ -37,6 +37,8 @@ $(document).ready(function(){
 
   }];
 
+  var userAnswer;
+
   var numCorrect = 0;
 
   var numQuestions = questions.length;
@@ -53,6 +55,49 @@ $(document).ready(function(){
   })
 
   function startGame() {
+    newQuestion();
+  }
 
+  function wrongAnswer(){
+
+  }
+
+  function correctAnswer(){
+
+  }
+
+  function newQuestion(){
+
+    $('.question-div').empty();
+
+    // <div class="form-check">
+    //   <input class="form-check-input" type="radio" name="answer1" id="answer1" value="option1" checked>
+    //     <label class="form-check-label question-one-label" for="answer1">
+    //     </label>
+    // </div>
+
+    var title = $('<h2>');
+
+    title.text(questions[questionTracker].questionText);
+
+    $('.question-div').append(title);
+
+    questions[questionTracker].answers.forEach(function(answer) {
+
+      var answerChoice = $('<div>').attr('class', 'form-check');
+
+      var radioBtn = $('<input>').attr('class', 'form-check-input').attr('type', 'radio').attr('correctAnswer', answer.answerCorrect);
+
+      var label = $('<label>').attr('class', 'form-check-label');
+      label.text(answer.answerText);
+
+      answerChoice.append(radioBtn);
+      answerChoice.append(label);
+      $('.question-div').append(answerChoice);
+
+
+    })
+
+    questionTracker++;
   }
 })
