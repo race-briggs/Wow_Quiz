@@ -129,6 +129,10 @@ $(document).ready(function(){
 
   var questionTracker = 0;
 
+  var submitBtn = $('<button>').attr('class', 'submit-btn').attr('type', 'submit');
+
+  submitBtn.text('Submit Answer');
+
 
   $('.start').on('click', function(){
     $('.start').attr('class', 'hidden')
@@ -138,21 +142,36 @@ $(document).ready(function(){
     startGame();
   })
 
-  $('.question-form input:radio').on('click', function(){
+  $(document).on('change', '.question-answer', (function(){
+    console.log('we are in');
     userAnswer = $(this).attr('correctAnswer');
     console.log(userAnswer);
+  }))
+
+  $(document).on('click', '.submit-btn', function(event){
+    event.preventDefault();
+    checkAnswer();
+    newQuestion();
   })
+
+  function checkAnswer(){
+    if(userAnswer === "true"){
+      correctAnswer();
+    } else if(userAnswer === "false"){
+      wrongAnswer();
+    }
+  }
 
   function startGame() {
     newQuestion();
   }
 
   function wrongAnswer(){
-
+    console.log('wrong');
   }
 
   function correctAnswer(){
-
+    console.log('right!');
   }
 
   function newQuestion(){
@@ -164,10 +183,6 @@ $(document).ready(function(){
     //     <label class="form-check-label question-one-label" for="answer1">
     //     </label>
     // </div>
-
-    var submitBtn = $('<button>').attr('class', 'submit-btn').attr('type', 'submit');
-
-    submitBtn.text('Submit Answer');
 
     var title = $('<h2>');
 
