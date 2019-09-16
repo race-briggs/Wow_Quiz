@@ -22,7 +22,8 @@ $(document).ready(function(){
       answerNumber: 4,
       answerText: 'Baine',
       answerCorrect: false
-    }]
+    }],
+      image: "../images/sylvanas.gif"
   }, 
     {
       questionNumber: 2,
@@ -46,7 +47,8 @@ $(document).ready(function(){
         answerNumber: 4,
         answerText: 'Turalyon',
         answerCorrect: false
-      }]
+      }],
+      image: "../images/argus.jpg"
   }, 
     {
       questionNumber: 3,
@@ -70,7 +72,8 @@ $(document).ready(function(){
         answerNumber: 4,
         answerText: 'The Council of the Three Hammers',
         answerCorrect: true
-      }]
+      }],
+      image: "../images/three_hammers.jpg"
   }, 
     {
       questionNumber: 4,
@@ -94,7 +97,8 @@ $(document).ready(function(){
         answerNumber: 4,
         answerText: 'A cult of Tauren',
         answerCorrect: false
-      }]
+      }],
+      image: "../images/naaru.jpg"
   },
     {
       questionNumber: 5,
@@ -118,7 +122,8 @@ $(document).ready(function(){
         answerNumber: 4,
         answerText: 'SI:7',
         answerCorrect: true
-      }]
+      }],
+      image: "../images/si7.jpg"
   }];
 
   var userAnswer;
@@ -128,6 +133,14 @@ $(document).ready(function(){
   var numQuestions = questions.length;
 
   var questionTracker = 0;
+
+  var time = 30;
+
+  var resultImg;
+
+  var imgTimer = 3;
+
+  var timer;
 
   var submitBtn = $('<button>').attr('class', 'submit-btn').attr('type', 'submit');
 
@@ -151,6 +164,7 @@ $(document).ready(function(){
   $(document).on('click', '.submit-btn', function(event){
     event.preventDefault();
     checkAnswer();
+    $('.results').addClass('hidden');
     newQuestion();
   })
 
@@ -169,19 +183,48 @@ $(document).ready(function(){
 
   function wrongAnswer(){
     console.log('wrong');
+    $('.results').empty();
+    $('.results').removeClass('hidden')
+    resultImg = setInterval(showImg, 3000);
   }
 
   function correctAnswer(){
     console.log('right!');
+    resultImg = setInterval(showImg, 3000);
     numCorrect++;
     updateScore();
   }
 
+  function showImg(){
+    $('.results').html('<img src="' + )
+  }
+
   function questionTimer(){
+    clearInterval(timer)
+    timer = setInterval(countDown, 1000);
+  }
+
+  function countDown(){
+    time--;
+    $('.timer').text(time + " seconds");
+
+    if(time===0){
+      alert('Time is up!')
+      alert('You got ' + numCorrect + "/" + numQuestions + " questions correct!")
+      resetGame()
+    }
   }
 
   function updateScore() {
     $('.score').text(numCorrect + "/" + numQuestions);
+  }
+
+  function resetGame() {
+    numCorrect = 0;
+    time = 30;
+    questionTracker = 0;
+    $('.question-div').addClass('hidden');
+    $('.start').removeClass('hidden');
   }
 
   function newQuestion(){
@@ -211,7 +254,8 @@ $(document).ready(function(){
     $('.question-form').append(submitBtn);
     $('.question-div').removeClass('hidden');
     questionTracker++;
-    setInterval(countDown, 30000);
-    setTimeout(questionTimer, 30000);
+    time = 30;
+    questionTimer();
+
   }
 })
