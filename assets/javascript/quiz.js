@@ -138,7 +138,7 @@ $(document).ready(function(){
     startGame();
   })
 
-  $('.form-check-input').on('click', function(){
+  $('.question-form input:radio').on('click', function(){
     userAnswer = $(this).attr('correctAnswer');
     console.log(userAnswer);
   })
@@ -157,7 +157,7 @@ $(document).ready(function(){
 
   function newQuestion(){
 
-    $('.question-div').empty();
+    $('.question-form').empty();
 
     // <div class="form-check">
     //   <input class="form-check-input" type="radio" name="answer1" id="answer1" value="option1" checked>
@@ -165,30 +165,32 @@ $(document).ready(function(){
     //     </label>
     // </div>
 
+    var submitBtn = $('<button>').attr('class', 'submit-btn').attr('type', 'submit');
+
+    submitBtn.text('Submit Answer');
+
     var title = $('<h2>');
 
     title.text(questions[questionTracker].questionText);
 
-    $('.question-div').append(title);
+    $('.question-form').append(title);
 
     questions[questionTracker].answers.forEach(function(answer) {
 
-      var answerChoice = $('<div>').attr('class', 'form-check');
+      var radioBtn = $('<input class="question-answer" type="radio" name="answer-choice">').attr('correctAnswer', answer.answerCorrect);
 
-      var radioBtn = $('<input>').attr('class', 'form-check-input').attr('type', 'radio').attr('correctAnswer', answer.answerCorrect);
-
-      var label = $('<label>').attr('class', 'form-check-label');
+      var label = $('<label class="form-check-label">');
       label.text(answer.answerText);
 
-      answerChoice.append(radioBtn);
-      answerChoice.append(label);
-      $('.question-div').append(answerChoice);
+      $('.question-form').append(radioBtn);
+      $('.question-form').append(label);
+      $('.question-form').append('<br>');
 
 
     })
 
-    $('.question-div').append('<button>').attr('class', 'submit-answer').attr('type', 'submit');
-
+    $('.question-form').append(submitBtn);
+    $('.question-div').removeClass('hidden');
     questionTracker++;
   }
 })
