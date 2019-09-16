@@ -163,6 +163,7 @@ $(document).ready(function(){
   }
 
   function startGame() {
+    updateScore();
     newQuestion();
   }
 
@@ -172,17 +173,20 @@ $(document).ready(function(){
 
   function correctAnswer(){
     console.log('right!');
+    numCorrect++;
+    updateScore();
+  }
+
+  function questionTimer(){
+  }
+
+  function updateScore() {
+    $('.score').text(numCorrect + "/" + numQuestions);
   }
 
   function newQuestion(){
 
     $('.question-form').empty();
-
-    // <div class="form-check">
-    //   <input class="form-check-input" type="radio" name="answer1" id="answer1" value="option1" checked>
-    //     <label class="form-check-label question-one-label" for="answer1">
-    //     </label>
-    // </div>
 
     var title = $('<h2>');
 
@@ -207,5 +211,7 @@ $(document).ready(function(){
     $('.question-form').append(submitBtn);
     $('.question-div').removeClass('hidden');
     questionTracker++;
+    setInterval(countDown, 30000);
+    setTimeout(questionTimer, 30000);
   }
 })
