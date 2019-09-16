@@ -24,17 +24,101 @@ $(document).ready(function(){
       answerCorrect: false
     }]
   }, 
-  {
-
+    {
+      questionNumber: 2,
+      questionText: "Who was the final boss of the Legion expansion?",
+      answers: [{
+        answerNumber: 1,
+        answerText: 'Argus',
+        answerCorrect: true
+      },
+      {
+        answerNumber: 2,
+        answerText: "Gul'dan",
+        answerCorrect: false
+      },
+      {
+        answerNumber: 3,
+        answerText: "Illidan",
+        answerCorrect: false
+      },
+      {
+        answerNumber: 4,
+        answerText: 'Turalyon',
+        answerCorrect: false
+      }]
   }, 
-  {
-
+    {
+      questionNumber: 3,
+      questionText: "Who leads the dwarves of Azeroth?",
+      answers: [{
+        answerNumber: 1,
+        answerText: 'Magni',
+        answerCorrect: false
+      },
+      {
+        answerNumber: 2,
+        answerText: 'Brann',
+        answerCorrect: false
+      },
+      {
+        answerNumber: 3,
+        answerText: "Moira",
+        answerCorrect: false
+      },
+      {
+        answerNumber: 4,
+        answerText: 'The Council of the Three Hammers',
+        answerCorrect: true
+      }]
   }, 
-  {
-
+    {
+      questionNumber: 4,
+      questionText: "What are the Naaru?",
+      answers: [{
+        answerNumber: 1,
+        answerText: 'Beings of Light',
+        answerCorrect: true
+      },
+      {
+        answerNumber: 2,
+        answerText: 'Demons',
+        answerCorrect: false
+      },
+      {
+        answerNumber: 3,
+        answerText: "A sect of magi",
+        answerCorrect: false
+      },
+      {
+        answerNumber: 4,
+        answerText: 'A cult of Tauren',
+        answerCorrect: false
+      }]
   },
-  {
-
+    {
+      questionNumber: 5,
+      questionText: "What is the name of the Alliance espionage faction?",
+      answers: [{
+        answerNumber: 1,
+        answerText: 'MI:6',
+        answerCorrect: false
+      },
+      {
+        answerNumber: 2,
+        answerText: 'The Kingsguard',
+        answerCorrect: false
+      },
+      {
+        answerNumber: 3,
+        answerText: "The Deathstalkers",
+        answerCorrect: false
+      },
+      {
+        answerNumber: 4,
+        answerText: 'SI:7',
+        answerCorrect: true
+      }]
   }];
 
   var userAnswer;
@@ -52,6 +136,11 @@ $(document).ready(function(){
     $('.question-div').removeClass('hidden');
 
     startGame();
+  })
+
+  $('.form-check-input').on('click', function(){
+    userAnswer = $(this).attr('correctAnswer');
+    console.log(userAnswer);
   })
 
   function startGame() {
@@ -97,6 +186,8 @@ $(document).ready(function(){
 
 
     })
+
+    $('.question-div').append('<button>').attr('class', 'submit-answer').attr('type', 'submit');
 
     questionTracker++;
   }
