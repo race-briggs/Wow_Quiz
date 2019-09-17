@@ -10,7 +10,7 @@ $(document).ready(function(){
     },
     {
       answerNumber: 2,
-      answerText: 'Sylvanas',
+      answerText: 'Sylvanas Windrunner',
       answerCorrect: true
     },
     {
@@ -20,7 +20,7 @@ $(document).ready(function(){
     },
     {
       answerNumber: 4,
-      answerText: 'Baine',
+      answerText: 'Baine Bloodhoof',
       answerCorrect: false
     }],
       image: "https://media.giphy.com/media/xThtatRttFzLD9oEtG/giphy.gif",
@@ -41,7 +41,7 @@ $(document).ready(function(){
       },
       {
         answerNumber: 3,
-        answerText: "Illidan",
+        answerText: "Illidan Stormrage",
         answerCorrect: false
       },
       {
@@ -57,17 +57,17 @@ $(document).ready(function(){
       questionText: "Who leads the dwarves of Azeroth?",
       answers: [{
         answerNumber: 1,
-        answerText: 'Magni',
+        answerText: 'Magni Bronzebeard',
         answerCorrect: false
       },
       {
         answerNumber: 2,
-        answerText: 'Brann',
+        answerText: 'Brann Bronzebeard',
         answerCorrect: false
       },
       {
         answerNumber: 3,
-        answerText: "Moira",
+        answerText: "Moira Darkiron",
         answerCorrect: false
       },
       {
@@ -222,8 +222,7 @@ $(document).ready(function(){
 
     if(time===0){
       alert('Time is up!')
-      alert('You got ' + numCorrect + "/" + numQuestions + " questions correct!")
-      resetGame()
+      newQuestion();
     }
   }
 
@@ -232,7 +231,7 @@ $(document).ready(function(){
   }
 
   function resetGame() {
-    clearTimeout(timer);
+    clearInterval(timer);
     numCorrect = 0;
     time = 30;
     questionTracker = 0;
@@ -245,8 +244,9 @@ $(document).ready(function(){
     $('.question-form').empty();
 
     if(questionTracker === questions.length){
-
+      clearInterval(timer);
       resetGame();
+      return
     }
 
     //questions.forEach(function(question){
