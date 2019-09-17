@@ -48,7 +48,7 @@ $(document).ready(function(){
         answerText: 'Turalyon',
         answerCorrect: false
       }],
-      image: "../images/argus.jpg"
+      image: "https://gamepedia.cursecdn.com/wowpedia/thumb/8/8d/Argus_Headshot.jpg/1200px-Argus_Headshot.jpg"
   }, 
     {
       questionNumber: 3,
@@ -73,7 +73,7 @@ $(document).ready(function(){
         answerText: 'The Council of the Three Hammers',
         answerCorrect: true
       }],
-      image: "../images/three_hammers.jpg"
+      image: "https://o.aolcdn.com/images/dims?quality=85&image_uri=http%3A%2F%2Fwww.blogcdn.com%2Fwow.joystiq.com%2Fmedia%2F2011%2F04%2F580councilthreehammers.jpg&client=amp-blogside-v2&signature=60955f99cab446ca518ef6f7db1f7c029ba3d146"
   }, 
     {
       questionNumber: 4,
@@ -98,7 +98,7 @@ $(document).ready(function(){
         answerText: 'A cult of Tauren',
         answerCorrect: false
       }],
-      image: "../images/naaru.jpg"
+      image: "https://gamepedia.cursecdn.com/wowpedia/0/0b/Xe%27ra.jpg"
   },
     {
       questionNumber: 5,
@@ -123,7 +123,7 @@ $(document).ready(function(){
         answerText: 'SI:7',
         answerCorrect: true
       }],
-      image: "../images/si7.jpg"
+      image: "https://gamepedia.cursecdn.com/wowpedia/thumb/2/21/Varian-Shattering.jpg/300px-Varian-Shattering.jpg?version=33c1682bcd65779abc3b6c7614101663"
   }];
 
   var userAnswer;
@@ -144,7 +144,7 @@ $(document).ready(function(){
 
 
   $('.start').on('click', function(){
-    $('.start').attr('class', 'hidden')
+    $('.start').addClass('hidden')
 
     $('.question-div').removeClass('hidden');
 
@@ -227,6 +227,7 @@ $(document).ready(function(){
   }
 
   function resetGame() {
+    clearInterval(timer);
     numCorrect = 0;
     time = 30;
     questionTracker = 0;
