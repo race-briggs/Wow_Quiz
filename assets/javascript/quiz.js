@@ -23,7 +23,8 @@ $(document).ready(function(){
       answerText: 'Baine',
       answerCorrect: false
     }],
-      image: "https://media.giphy.com/media/xThtatRttFzLD9oEtG/giphy.gif"
+      image: "https://media.giphy.com/media/xThtatRttFzLD9oEtG/giphy.gif",
+      rightAnswer: "Sylvanas!"
   }, 
     {
       questionNumber: 2,
@@ -48,7 +49,8 @@ $(document).ready(function(){
         answerText: 'Turalyon',
         answerCorrect: false
       }],
-      image: "https://gamepedia.cursecdn.com/wowpedia/thumb/8/8d/Argus_Headshot.jpg/1200px-Argus_Headshot.jpg"
+      image: "https://gamepedia.cursecdn.com/wowpedia/thumb/8/8d/Argus_Headshot.jpg/1200px-Argus_Headshot.jpg",
+      rightAnswer: "Argus!"
   }, 
     {
       questionNumber: 3,
@@ -73,7 +75,8 @@ $(document).ready(function(){
         answerText: 'The Council of the Three Hammers',
         answerCorrect: true
       }],
-      image: "https://o.aolcdn.com/images/dims?quality=85&image_uri=http%3A%2F%2Fwww.blogcdn.com%2Fwow.joystiq.com%2Fmedia%2F2011%2F04%2F580councilthreehammers.jpg&client=amp-blogside-v2&signature=60955f99cab446ca518ef6f7db1f7c029ba3d146"
+      image: "https://o.aolcdn.com/images/dims?quality=85&image_uri=http%3A%2F%2Fwww.blogcdn.com%2Fwow.joystiq.com%2Fmedia%2F2011%2F04%2F580councilthreehammers.jpg&client=amp-blogside-v2&signature=60955f99cab446ca518ef6f7db1f7c029ba3d146",
+      rightAnswer: "The Council of the Three Hammers!"
   }, 
     {
       questionNumber: 4,
@@ -98,7 +101,8 @@ $(document).ready(function(){
         answerText: 'A cult of Tauren',
         answerCorrect: false
       }],
-      image: "https://gamepedia.cursecdn.com/wowpedia/0/0b/Xe%27ra.jpg"
+      image: "https://gamepedia.cursecdn.com/wowpedia/0/0b/Xe%27ra.jpg",
+      rightAnswer: "Beings of Light!"
   },
     {
       questionNumber: 5,
@@ -123,7 +127,8 @@ $(document).ready(function(){
         answerText: 'SI:7',
         answerCorrect: true
       }],
-      image: "https://gamepedia.cursecdn.com/wowpedia/thumb/2/21/Varian-Shattering.jpg/300px-Varian-Shattering.jpg?version=33c1682bcd65779abc3b6c7614101663"
+      image: "https://gamepedia.cursecdn.com/wowpedia/thumb/2/21/Varian-Shattering.jpg/300px-Varian-Shattering.jpg?version=33c1682bcd65779abc3b6c7614101663",
+      rightAnswer: "SI:7!"
   }];
 
   var userAnswer;
@@ -180,6 +185,7 @@ $(document).ready(function(){
     console.log('wrong');
     $('.results').empty();
     $('.results').removeClass('hidden');
+    $('.results').append('<h2> That is incorrect! The answer was ' + questions[questionTracker - 1].rightAnswer + ' </h2>');
     showResult();
   }
 
@@ -187,20 +193,19 @@ $(document).ready(function(){
     console.log('right!');
     $('.results').empty();
     $('.results').removeClass('hidden');
+    $('.results').append('<h2 class="results-text"> That is correct! </h2>');
     showResult();
     numCorrect++;
     updateScore();
   }
 
   function showResult(){
-    alert('showing result picture');
     console.log(questions[questionTracker-1].image);
     $('.results').append('<img src=' + questions[questionTracker - 1].image + ' class="results-img">');
     setTimeout(hideResult, 5000);
   }
 
   function hideResult(){
-    alert('RESULT IMAGE OVER')
     $('.results').addClass('hidden');
     $('.question-div').removeClass('hidden');
     newQuestion();
@@ -227,7 +232,7 @@ $(document).ready(function(){
   }
 
   function resetGame() {
-    clearInterval(timer);
+    clearTimeout(timer);
     numCorrect = 0;
     time = 30;
     questionTracker = 0;
@@ -238,6 +243,11 @@ $(document).ready(function(){
   function newQuestion(){
 
     $('.question-form').empty();
+
+    if(questionTracker === questions.length){
+
+      resetGame();
+    }
 
     //questions.forEach(function(question){
     //  var title = $('<h1>');
@@ -251,7 +261,7 @@ $(document).ready(function(){
     //
     //})
 
-    var title = $('<h2>');
+    var title = $('<h2 class="question-text">');
 
     title.text(questions[questionTracker].questionText);
 
