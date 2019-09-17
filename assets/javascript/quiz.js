@@ -129,7 +129,85 @@ $(document).ready(function(){
       }],
       image: "https://gamepedia.cursecdn.com/wowpedia/thumb/2/21/Varian-Shattering.jpg/300px-Varian-Shattering.jpg?version=33c1682bcd65779abc3b6c7614101663",
       rightAnswer: "SI:7!"
-  }];
+  },
+    {
+      questionNumber: 6,
+      questionText: "Who is not one of the dreaded Old Gods?",
+      answers: [{
+        answerNumber: 1,
+        answerText: "C'thuun",
+        answerCorrect: false
+      },
+      {
+        answerNumber: 2,
+        answerText: "Yogg-Saron",
+        answerCorrect: false
+      },
+      {
+        answerNumber: 3,
+        answerText: "Xavius",
+        answerCorrect: true
+      },
+      {
+        answerNumber: 4,
+        answerText: "Y'sharrj",
+        answerCorrect: false
+      }],
+      image: "https://gamepedia.cursecdn.com/wowpedia/e/ea/Xavius_TCG2.jpg?version=a9d1524a9237eea04410834d47fb61b7",
+      rightAnswer: "Xavius!"
+    },
+    {
+      questionNumber: 7,
+      questionText: "Who was the first mortal druid?",
+      answers: [{
+        answerNumber: 1,
+        answerText: 'Malfurion Stormrage',
+        answerCorrect: true
+      },
+      {
+        answerNumber: 2,
+        answerText: 'Cenarius',
+        answerCorrect: false
+      },
+      {
+        answerNumber: 3,
+        answerText: "Hamuul Runetotem",
+        answerCorrect: false
+      },
+      {
+        answerNumber: 4,
+        answerText: 'Magni Bronzebeard',
+        answerCorrect: false
+      }],
+      image: "https://vignette.wikia.nocookie.net/wowwiki/images/e/ed/MalfurionFullHearthstone.png/revision/latest?cb=20140505223304",
+      rightAnswer: "Malfurion!"
+    },
+    {
+      questionNumber: 8,
+      questionText: "What is the oldest mortal race on Azeroth?",
+      answers: [{
+        answerNumber: 1,
+        answerText: 'Night Elves',
+        answerCorrect: false
+      },
+      {
+        answerNumber: 2,
+        answerText: 'Trolls',
+        answerCorrect: true
+      },
+      {
+        answerNumber: 3,
+        answerText: "Dwarves",
+        answerCorrect: false
+      },
+      {
+        answerNumber: 4,
+        answerText: 'Earthen',
+        answerCorrect: false
+      }],
+      image: "https://gamepedia.cursecdn.com/wowpedia/f/f2/Vol%27jin_Wei.jpg",
+      rightAnswer: "the Trolls!"
+    }];
 
   var userAnswer;
 
@@ -241,10 +319,13 @@ $(document).ready(function(){
 
   function newQuestion(){
 
+    console.log(questions[questionTracker].rightAnswer);
+
     $('.question-form').empty();
 
     if(questionTracker === questions.length){
       clearInterval(timer);
+      alert('Quiz over! You got ' + numCorrect + ' out of ' + questions.length + ' questions correct!');
       resetGame();
       return
     }
