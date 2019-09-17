@@ -1,4 +1,5 @@
 $(document).ready(function(){
+  //an array of objects containing the question information, including another array of answer objects
   var questions = [
   {
     questionNumber: 1,
@@ -209,6 +210,8 @@ $(document).ready(function(){
       rightAnswer: "the Trolls!"
     }];
 
+  
+  //various variables, including timers, a question tracker, and a button element
   var userAnswer;
 
   var numCorrect = 0;
@@ -226,6 +229,7 @@ $(document).ready(function(){
   submitBtn.text('Submit Answer');
 
 
+  //starts the game on the click of the begin button
   $('.start').on('click', function(){
     $('.start').addClass('hidden')
 
@@ -234,18 +238,21 @@ $(document).ready(function(){
     startGame();
   })
 
+  //sets the userAnswer equal to true or false based on their chosen answer
   $(document).on('change', '.question-answer', (function(){
     console.log('we are in');
     userAnswer = $(this).attr('correctAnswer');
     console.log(userAnswer);
   }))
 
+  //runs a series of functions on an answer submission
   $(document).on('click', '.submit-btn', function(event){
     event.preventDefault();
     $('.question-div').addClass('hidden');
     checkAnswer();
   })
 
+  //checks to see if the answer is correct
   function checkAnswer(){
     if(userAnswer === "true"){
       correctAnswer();
@@ -254,11 +261,13 @@ $(document).ready(function(){
     }
   }
 
+  //begins the game, feeding a question and setting the score at 0
   function startGame() {
     updateScore();
     newQuestion();
   }
 
+  //runs functions for the wrong answer
   function wrongAnswer(){
     console.log('wrong');
     $('.results').empty();
@@ -267,6 +276,7 @@ $(document).ready(function(){
     showResult();
   }
 
+  //runs functions for the correct answer, and updates the score
   function correctAnswer(){
     console.log('right!');
     $('.results').empty();
@@ -277,37 +287,43 @@ $(document).ready(function(){
     updateScore();
   }
 
+  //shows an image on the submission of an answer
   function showResult(){
     console.log(questions[questionTracker-1].image);
     $('.results').append('<img src=' + questions[questionTracker - 1].image + ' class="results-img">');
     setTimeout(hideResult, 5000);
   }
 
+  //hides the image after 5 seconds
   function hideResult(){
     $('.results').addClass('hidden');
     $('.question-div').removeClass('hidden');
     newQuestion();
   }
 
+  //initiates the question timer
   function questionTimer(){
     clearInterval(timer)
     timer = setInterval(countDown, 1000);
   }
 
+  //a 30 second decreasing timer
   function countDown(){
     time--;
     $('.timer').text(time + " seconds");
 
     if(time===0){
       alert('Time is up!')
-      newQuestion();
+      wrongAnswer();
     }
   }
 
+  //updates on correct answers
   function updateScore() {
     $('.score').text(numCorrect + "/" + numQuestions);
   }
 
+  //resets the game to base values
   function resetGame() {
     clearInterval(timer);
     numCorrect = 0;
@@ -323,24 +339,13 @@ $(document).ready(function(){
 
     $('.question-form').empty();
 
+    //ends the game if you run out of questions
     if(questionTracker === questions.length){
       clearInterval(timer);
       alert('Quiz over! You got ' + numCorrect + ' out of ' + questions.length + ' questions correct!');
       resetGame();
       return
     }
-
-    //questions.forEach(function(question){
-    //  var title = $('<h1>');
-    //  title.text(question.question);
-    //
-    //  $('.question-div').append(title);
-    //
-    //  question.answers.forEach(function(answer){
-    //   
-    //  })
-    //
-    //})
 
     var title = $('<h2 class="question-text">');
 
