@@ -271,6 +271,7 @@ $(document).ready(function(){
   function wrongAnswer(){
     console.log('wrong');
     $('.results').empty();
+    $('.question-div').addClass('hidden');
     $('.results').removeClass('hidden');
     $('.results').append('<h2> That is incorrect! The answer was ' + questions[questionTracker - 1].rightAnswer + ' </h2>');
     showResult();
@@ -314,6 +315,7 @@ $(document).ready(function(){
 
     if(time===0){
       alert('Time is up!')
+      clearInterval(timer);
       wrongAnswer();
     }
   }
